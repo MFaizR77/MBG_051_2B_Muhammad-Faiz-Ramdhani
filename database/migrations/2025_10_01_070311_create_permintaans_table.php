@@ -10,11 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('permintaan', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('author');
-            $table->text('description')->nullable();
+            $table->foreignId('pemohon_id')->constrained('users');
+            $table->date('tgl_masak');
+            $table->string('menu_makan', 255);
+            $table->integer('jumlah_porsi');
+            $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('permintaans');
     }
 };
