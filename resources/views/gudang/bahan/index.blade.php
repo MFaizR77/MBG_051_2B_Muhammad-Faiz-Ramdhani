@@ -19,6 +19,7 @@
                 <th>Tgl Masuk</th>
                 <th>Tgl Kadaluarsa</th>
                 <th>Status</th>
+                <th>Aksi</th> {{-- Tambah kolom aksi --}}
             </tr>
         </thead>
         <tbody>
@@ -45,10 +46,16 @@
                                 <span class="badge bg-success">Tersedia</span>
                         @endswitch
                     </td>
+                    <td>
+                        <a href="{{ route('gudang.bahan.edit', $item->id) }}" 
+                           class="btn btn-sm btn-warning">
+                            Edit Stok
+                        </a>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7" class="text-center">Belum ada data bahan baku</td>
+                    <td colspan="8" class="text-center">Belum ada data bahan baku</td>
                 </tr>
             @endforelse
         </tbody>

@@ -63,4 +63,29 @@ class BahanBakuController extends Controller
         $bahan = BahanBaku::all(); // atau pakai orderBy jika mau
         return view('gudang.bahan.index', compact('bahan'));
     }
+
+    public function edit($id)
+    {
+        $bahan = BahanBaku::findOrFail($id);
+        return view('gudang.bahan.edit', compact('bahan'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $bahan = BahanBaku::findOrFail($id);
+
+        $request->validate([
+            'jumlah' => 'required|integer|min:0',
+        ], [
+            'jumlah.min' => 'Jumlah stok tidak boleh kurang dari 0.',
+        ]);
+
+        $bahan->jumlah = $request->jumlah;
+        // otomatis hitung status lewat model booted()
+        $bahan->save();
+
+        return redirect()->route('gudang.bahan.index')
+            ->with('success', 'Stok bahan berhasil diperbarui!');
+    }
+
 }
