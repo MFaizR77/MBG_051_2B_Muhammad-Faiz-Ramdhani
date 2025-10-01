@@ -47,9 +47,11 @@
                         @endswitch
                     </td>
                     <td>
-                        <a href="{{ route('gudang.bahan.edit', $item->id) }}" 
-                           class="btn btn-sm btn-warning">
+                        <a href="{{ route('gudang.bahan.edit', $item->id) }}" class="btn btn-sm btn-warning">
                             Edit Stok
+                        </a>
+                        <a href="{{ route('gudang.bahan.confirmDelete', $item->id) }}" class="btn btn-sm btn-danger">
+                            Hapus
                         </a>
                     </td>
                 </tr>

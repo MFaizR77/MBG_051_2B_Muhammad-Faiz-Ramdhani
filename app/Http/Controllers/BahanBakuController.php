@@ -88,4 +88,27 @@ class BahanBakuController extends Controller
             ->with('success', 'Stok bahan berhasil diperbarui!');
     }
 
+    public function confirmDelete($id)
+    {
+        $bahan = BahanBaku::findOrFail($id);
+        return view('gudang.bahan.delete', compact('bahan'));
+    }
+
+    public function destroy($id)
+    {
+        $bahan = BahanBaku::findOrFail($id);
+
+        // Cek status bahan
+        if ($bahan->status !== 'kadaluarsa') {
+            return redirect()->route('gudang.bahan.index')
+                ->with('error', 'Bahan tidak bisa dihapus karena statusnya bukan kadaluarsa.');
+        }
+
+        $bahan->delete();
+
+        return redirect()->route('gudang.bahan.index')
+            ->with('success', 'Bahan kadaluarsa berhasil dihapus!');
+    }
+
+
 }
