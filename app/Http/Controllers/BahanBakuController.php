@@ -55,16 +55,12 @@ class BahanBakuController extends Controller
         ]);
 
         return redirect()->route('gudang.bahan.index')
-                         ->with('success', 'Bahan baku berhasil ditambahkan!');
+            ->with('success', 'Bahan baku berhasil ditambahkan!');
     }
 
     public function index()
     {
-        $bahan = BahanBaku::all();
-        return view('gudang.bahan.create', compact('bahan'));
+        $bahan = BahanBaku::all(); // atau pakai orderBy jika mau
+        return view('gudang.bahan.index', compact('bahan'));
     }
-
-
-    
-    
 }
