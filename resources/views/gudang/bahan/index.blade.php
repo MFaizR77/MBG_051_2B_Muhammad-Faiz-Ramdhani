@@ -19,7 +19,7 @@
                 <th>Tgl Masuk</th>
                 <th>Tgl Kadaluarsa</th>
                 <th>Status</th>
-                <th>Aksi</th> {{-- Tambah kolom aksi --}}
+                <th>Aksi</th> 
             </tr>
         </thead>
         <tbody>

@@ -63,7 +63,7 @@
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
 
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route(name: 'login') }}">
                             @csrf
                             <div class="mb-3">
                                 <label>Email</label>

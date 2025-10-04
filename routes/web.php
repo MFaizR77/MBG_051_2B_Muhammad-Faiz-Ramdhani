@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BahanBakuController;
+use App\Http\Controllers\PermintaanController;
 
 
 
@@ -28,6 +29,9 @@ Route::middleware('auth.role:gudang')->prefix('gudang')->group(function () {
     Route::delete('/bahan/{id}', [BahanBakuController::class, 'destroy'])->name('gudang.bahan.destroy');
     Route::get('/bahan/{id}/delete', [BahanBakuController::class, 'confirmDelete'])->name('gudang.bahan.confirmDelete');
     Route::delete('/bahan/{id}', [BahanBakuController::class, 'destroy'])->name('gudang.bahan.destroy');
+    Route::get('/permintaan', [PermintaanController::class, 'indexGudang'])->name('gudang.permintaan.index');
+    Route::post('/permintaan/{id}/approve', [PermintaanController::class, 'approve'])->name('gudang.permintaan.approve');
+    Route::post('/permintaan/{id}/reject', [PermintaanController::class, 'reject'])->name('gudang.permintaan.reject');
 
 });
 
@@ -35,4 +39,8 @@ Route::middleware(['auth.role:dapur'])->prefix('dapur')->group(function () {
     Route::get('/', function () {
         return view('dapur.dashboard');
     });
+    Route::get('/permintaan', [PermintaanController::class, 'create'])->name('dapur.permintaan.create');
+    Route::post('/permintaan', [PermintaanController::class, 'store'])->name('dapur.permintaan.store');
+    Route::get('/status', [PermintaanController::class, 'status'])->name('dapur.permintaan.status');
+
 });

@@ -28,34 +28,13 @@ class BahanBaku extends Model
         'tanggal_kadaluarsa' => 'date',
     ];
 
-
+    // Relasi: Bahan bisa dipakai di banyak permintaan detail
     public function permintaanDetails()
     {
         return $this->hasMany(PermintaanDetail::class, 'bahan_id');
     }
 
- 
-    public function getStatusTampilAttribute()
-    {
-        if ($this->jumlah == 0) {
-            return 'habis';
-        }
-
-        $today = Carbon::today();
-        $kadaluarsa = $this->tanggal_kadaluarsa; 
-
-        if ($today->greaterThanOrEqualTo($kadaluarsa)) {
-            return 'kadaluarsa';
-        }
-
-        if ($kadaluarsa->isFuture() && $today->diffInDays($kadaluarsa) <= 3) {
-            return 'segera_kadaluarsa';
-        }
-
-        return 'tersedia';
-    }
-
-
+    // Helper: Hitung status berdasarkan aturan bisnis
     public function hitungStatus()
     {
         if ($this->jumlah == 0) {
@@ -63,20 +42,44 @@ class BahanBaku extends Model
         }
 
         $today = Carbon::today();
-        $kadaluarsa = $this->tanggal_kadaluarsa;
+        $kadaluarsa = Carbon::parse($this->tanggal_kadaluarsa);
 
         if ($today->greaterThanOrEqualTo($kadaluarsa)) {
             return 'kadaluarsa';
         }
 
-        if ($kadaluarsa->isFuture() && $today->diffInDays($kadaluarsa) <= 3) {
+        if ($kadaluarsa->diffInDays($today) <= 3) {
             return 'segera_kadaluarsa';
         }
 
         return 'tersedia';
     }
 
- 
+
+    // Di dalam class BahanBaku
+    protected $appends = ['status_tampil'];
+
+    public function getStatusTampilAttribute()
+    {
+        if ($this->jumlah == 0) {
+            return 'habis';
+        }
+
+        $today = Carbon::today();
+        $kadaluarsa = Carbon::parse($this->tanggal_kadaluarsa);
+
+        if ($today->greaterThanOrEqualTo($kadaluarsa)) {
+            return 'kadaluarsa';
+        }
+
+        if ($kadaluarsa->diffInDays($today) <= 3) {
+            return 'segera_kadaluarsa';
+        }
+
+        return 'tersedia';
+    }
+
+    // Mutator: otomatis update status saat jumlah/tanggal berubah
     public function setJumlahAttribute($value)
     {
         $this->attributes['jumlah'] = $value;

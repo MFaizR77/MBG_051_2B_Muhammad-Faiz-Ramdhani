@@ -15,7 +15,6 @@ class BahanBakuController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'nama' => 'required|string|max:120',
             'kategori' => 'required|string|max:60',
@@ -28,7 +27,6 @@ class BahanBakuController extends Controller
             'tanggal_kadaluarsa.after' => 'Tanggal kadaluarsa harus setelah tanggal masuk.',
         ]);
 
-        // Hitung status awal
         $jumlah = $request->jumlah;
         $tglKadaluarsa = Carbon::parse($request->tanggal_kadaluarsa);
         $today = Carbon::today();
@@ -43,7 +41,6 @@ class BahanBakuController extends Controller
             $status = 'tersedia';
         }
 
-        // Simpan ke database
         BahanBaku::create([
             'nama' => $request->nama,
             'kategori' => $request->kategori,
@@ -60,7 +57,7 @@ class BahanBakuController extends Controller
 
     public function index()
     {
-        $bahan = BahanBaku::all(); // atau pakai orderBy jika mau
+        $bahan = BahanBaku::all(); 
         return view('gudang.bahan.index', compact('bahan'));
     }
 
@@ -81,7 +78,7 @@ class BahanBakuController extends Controller
         ]);
 
         $bahan->jumlah = $request->jumlah;
-        // otomatis hitung status lewat model booted()
+
         $bahan->save();
 
         return redirect()->route('gudang.bahan.index')

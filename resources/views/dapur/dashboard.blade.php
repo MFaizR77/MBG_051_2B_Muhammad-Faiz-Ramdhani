@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar navbar-dark bg-success">
         <div class="container">
-            <span class="navbar-brand">MBG - Dapur</span>
+            <a href="{{ url('/dapur')}}" class="navbar-brand">MBG - Dapur</a>
             <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf
                 <button type="submit" class="btn btn-link text-danger" onclick="return confirm('Yakin ingin logout?')">
