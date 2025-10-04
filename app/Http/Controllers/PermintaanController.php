@@ -48,13 +48,13 @@ class PermintaanController extends Controller
         ]);
 
         // Simpan detail permintaan
-        // foreach ($request->bahan_id as $index => $bahanId) {
-        //     PermintaanDetail::create([
-        //         'permintaan_id' => $permintaan->id,
-        //         'bahan_id' => $bahanId,
-        //         'jumlah_diminta' => $request->jumlah_diminta[$index],
-        //     ]);
-        // }
+        foreach ($request->bahan_id as $index => $bahanId) {
+            PermintaanDetail::create([
+                'permintaan_id' => $permintaan->id,
+                'bahan_id' => $bahanId,
+                'jumlah_diminta' => $request->jumlah_diminta[$index],
+            ]);
+        }
 
         return redirect()->route('dapur.permintaan.status')->with('success', 'Permintaan berhasil dikirim!');
     }
@@ -63,7 +63,6 @@ class PermintaanController extends Controller
     {
         // Ambil semua permintaan dengan status 'menunggu', urut terbaru
         $permintaanList = Permintaan::with(['pemohon', 'details.bahan'])
-            ->where('status', 'menunggu')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -72,7 +71,10 @@ class PermintaanController extends Controller
 
     public function status()
     {
-        $permintaan = Permintaan::where('pemohon_id', auth()->id())
+        // Ambil permintaan milik user yang sedang login
+        $pemohonId = session('user_id');
+   
+        $permintaan = Permintaan::where('pemohon_id',$pemohonId)
             ->orderBy('created_at', 'desc')
             ->get();
 
