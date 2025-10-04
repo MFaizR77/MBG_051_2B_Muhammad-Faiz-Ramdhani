@@ -34,7 +34,7 @@ class BahanBaku extends Model
         return $this->hasMany(PermintaanDetail::class, 'bahan_id');
     }
 
-    // Helper: Hitung status berdasarkan aturan bisnis
+    // Hitung status berdasarkan aturan
     public function hitungStatus()
     {
         if ($this->jumlah == 0) {
@@ -48,7 +48,7 @@ class BahanBaku extends Model
             return 'kadaluarsa';
         }
 
-        if ($kadaluarsa->diffInDays($today) <= 3) {
+        if ($today->lessThan($kadaluarsa) && $today->diffInDays($kadaluarsa) <= 3) {
             return 'segera_kadaluarsa';
         }
 
@@ -71,8 +71,8 @@ class BahanBaku extends Model
         if ($today->greaterThanOrEqualTo($kadaluarsa)) {
             return 'kadaluarsa';
         }
-
-        if ($kadaluarsa->diffInDays($today) <= 3) {
+        // $kadaluarsa->diffInDays($today) <= 3
+        if ($today->lessThan($kadaluarsa) && $today->diffInDays($kadaluarsa) <= 3) {
             return 'segera_kadaluarsa';
         }
 

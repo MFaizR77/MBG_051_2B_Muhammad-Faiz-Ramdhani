@@ -82,19 +82,19 @@ function setActiveNav() {
     }
 }
 
-/**
- * Setup konfirmasi hapus (opsional, tapi bagus)
- */
-function setupDeleteConfirmation() {
-    document.addEventListener('click', function (e) {
-        if (e.target.closest('.btn-danger') && e.target.closest('[data-confirm]')) {
-            const message = e.target.closest('[data-confirm]').dataset.confirm || 'Yakin ingin menghapus data ini?';
-            if (!confirm(message)) {
-                e.preventDefault();
-            }
-        }
-    });
-}
+// /**
+//  * Setup konfirmasi hapus 
+//  */
+// function setupDeleteConfirmation() {
+//     document.addEventListener('click', function (e) {
+//         if (e.target.closest('.btn-danger') && e.target.closest('[data-confirm]')) {
+//             const message = e.target.closest('[data-confirm]').dataset.confirm || 'Yakin ingin menghapus data ini?';
+//             if (!confirm(message)) {
+//                 e.preventDefault();
+//             }
+//         }
+//     });
+// }
 
 // ================================
 // INIT
