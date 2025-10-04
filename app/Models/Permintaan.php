@@ -22,7 +22,7 @@ class Permintaan extends Model
         'updated_at' => 'datetime',
     ];
 
-    // Relasi jika ada
+
     public function pemohon()
     {
         return $this->belongsTo(User::class, 'pemohon_id');

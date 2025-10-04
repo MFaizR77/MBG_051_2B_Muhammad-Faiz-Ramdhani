@@ -43,6 +43,11 @@
                                         @break
                                 @endswitch
                             </td>
+                             <td>
+                                <a href="{{ route('dapur.permintaan.detail', $item->id) }}" class="btn btn-sm btn-outline-info">
+                                    <i class="bi bi-eye"></i> Detail
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <tr>

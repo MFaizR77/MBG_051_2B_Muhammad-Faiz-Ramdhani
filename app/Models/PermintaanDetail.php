@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PermintaanDetail extends Model
 {
-    protected $table = 'permintaan_detail'; // sesuai nama tabel di soal
+    protected $table = 'permintaan_detail';
 
     protected $fillable = ['permintaan_id', 'bahan_id', 'jumlah_diminta'];
 
