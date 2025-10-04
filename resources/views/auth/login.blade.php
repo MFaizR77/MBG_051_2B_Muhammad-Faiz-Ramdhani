@@ -1,84 +1,58 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body class="bg-light d-flex align-items-center justify-content-center vh-100">
-    <div class="w-100" style="max-width: 400px;">
-        <div class="card shadow">
-            <div class="card-body">
-                <h1 class="h3 mb-4 text-center">Login</h1>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="email" class="form-label fw-semibold">Email</label>
-                        <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus
-                            class="form-control" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="password" class="form-label fw-semibold">Password</label>
-                        <input id="password" name="password" type="password" required
-                            class="form-control" />
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 fw-semibold">
-                        Login
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login - MBG</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - MBG</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <h4>Login MBG</h4>
-                    </div>
-                    <div class="card-body">
-                        @if(session('error'))
-                            <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
+<body class="bg-success bg-gradient min-vh-100 d-flex align-items-center justify-content-center">
 
-                        <form method="POST" action="{{ route(name: 'login') }}">
-                            @csrf
-                            <div class="mb-3">
-                                <label>Email</label>
-                                <input type="email" name="email" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5 col-lg-4">
+
+        <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+          <div class="card-header bg-success text-white text-center py-3">
+            <h4 class="fw-semibold mb-0">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Login MBG
+            </h4>
+          </div>
+
+          <div class="card-body bg-white p-4">
+            @if(session('error'))
+              <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+
+            <form method="POST" action="{{ route('login') }}">
+              @csrf
+
+              <div class="mb-3">
+                <label for="email" class="form-label fw-medium">Email</label>
+                <input type="email" id="email" name="email" class="form-control form-control-lg rounded-3" required autofocus>
+              </div>
+
+              <div class="mb-4">
+                <label for="password" class="form-label fw-medium">Password</label>
+                <input type="password" id="password" name="password" class="form-control form-control-lg rounded-3" required>
+              </div>
+
+              <button type="submit" class="btn btn-success w-100 py-2 fw-semibold rounded-3">
+                <i class="bi bi-door-open me-2"></i>Login
+              </button>
+            </form>
+          </div>
         </div>
+
+        <p class="text-center text-white mt-3 small">
+          © 2025 MBG System. All rights reserved.
+        </p>
+
+      </div>
     </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

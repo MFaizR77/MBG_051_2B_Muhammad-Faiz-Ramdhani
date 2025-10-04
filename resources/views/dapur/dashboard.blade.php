@@ -1,133 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBG - Dapur</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .navbar-brand {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .card {
-            border: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            height: 100%;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        }
-        .card-body {
-            padding: 1.5rem;
-        }
-        .card-title {
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: #212529;
-        }
-        .card-text {
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        .btn {
-            font-weight: 500;
-            padding: 0.45rem 1.25rem;
-            border-radius: 8px;
-        }
-        .welcome-header {
-            font-weight: 600;
-            color: #198754;
-            margin-bottom: 1.5rem;
-        }
-        .icon-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        .bg-success-light {
-            background-color: rgba(25, 135, 84, 0.15);
-            color: #198754;
-        }
-        .bg-warning-light {
-            background-color: rgba(255, 193, 7, 0.15);
-            color: #ffc107;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBG - Dapur</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-success">
-        <div class="container">
-            <a href="{{ url('/dapur') }}" class="navbar-brand">MBG - Dapur</a>
-            <div class="d-flex">
-                <a href="{{ url('/dapur/permintaan') }}" class="btn btn-outline-light btn-sm me-2 px-3">
-                    <i class="bi bi-journal-plus me-1"></i> Ajukan Permintaan
-                </a>
-                <a href="{{ url('/dapur/status') }}" class="btn btn-outline-light btn-sm me-2 px-3">
-                    <i class="bi bi-clipboard-check me-1"></i> Status Permintaan
-                </a>
-                <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                    @csrf
-                    <button type="submit" class="btn btn-link text-white btn-sm px-3"
-                            onclick="return confirm('Yakin ingin logout?')">
-                        <i class="bi bi-box-arrow-right me-1"></i> Logout
-                    </button>
-                </form>
-            </div>
-        </div>
-    </nav>
+<body class="bg-light d-flex flex-column min-vh-100">
 
-    <div class="container mt-4">
-        @if (!View::hasSection('content'))
-            <h2 class="welcome-header">Selamat Datang di Dapur MBG</h2>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center d-flex flex-column justify-content-center">
-                            <div class="icon-circle bg-success-light mx-auto">
-                                <i class="bi bi-journal-plus"></i>
-                            </div>
-                            <h5 class="card-title">Ajukan Permintaan Bahan</h5>
-                            <p class="card-text text-muted mb-3">Buat permintaan bahan baku untuk kebutuhan memasak.</p>
-                            <a href="{{ url('/dapur/permintaan') }}" class="btn btn-success mt-auto">
-                                <i class="bi bi-plus-circle me-1"></i> Buat Permintaan
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center d-flex flex-column justify-content-center">
-                            <div class="icon-circle bg-warning-light mx-auto">
-                                <i class="bi bi-clipboard-check"></i>
-                            </div>
-                            <h5 class="card-title">Status Permintaan</h5>
-                            <p class="card-text text-muted mb-3">Lihat status permintaan: menunggu, disetujui, atau ditolak.</p>
-                            <a href="{{ url('/dapur/status') }}" class="btn btn-warning mt-auto text-dark">
-                                <i class="bi bi-eye me-1"></i> Lihat Status
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @else
-            @yield('content')
-        @endif
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-semibold letter-spacing-1" href="{{ url('/dapur') }}">MBG - Dapur</a>
+      <div class="d-flex align-items-center">
+        <a href="{{ url('/dapur/permintaan') }}" class="btn btn-outline-light btn-sm me-2">
+          <i class="bi bi-journal-plus me-1"></i> Ajukan Permintaan
+        </a>
+        <a href="{{ url('/dapur/status') }}" class="btn btn-outline-light btn-sm me-2">
+          <i class="bi bi-clipboard-check me-1"></i> Status Permintaan
+        </a>
+        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+          @csrf
+          <button type="submit" class="btn btn-link text-white btn-sm px-3"
+                  onclick="return confirm('Yakin ingin logout?')">
+            <i class="bi bi-box-arrow-right me-1"></i> Logout
+          </button>
+        </form>
+      </div>
     </div>
+  </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Main Content -->
+  <main class="container my-5 flex-fill">
+    @if (!View::hasSection('content'))
+      <div class="text-center mb-5">
+        <h2 class="fw-bold text-success">Selamat Datang di Dapur MBG</h2>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- Card 1 -->
+        <div class="col-md-5">
+          <div class="card text-center shadow-sm border-0 h-100">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <div class="bg-success bg-opacity-25 text-success rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 64px; height: 64px;">
+                <i class="bi bi-journal-plus fs-3"></i>
+              </div>
+              <h5 class="fw-semibold mb-2">Ajukan Permintaan Bahan</h5>
+              <p class="text-muted mb-3">Buat permintaan bahan baku untuk kebutuhan memasak dapur.</p>
+              <a href="{{ url('/dapur/permintaan') }}" class="btn btn-success fw-medium mt-auto">
+                <i class="bi bi-plus-circle me-1"></i> Buat Permintaan
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-md-5">
+          <div class="card text-center shadow-sm border-0 h-100">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <div class="bg-warning bg-opacity-25 text-warning rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 64px; height: 64px;">
+                <i class="bi bi-clipboard-check fs-3"></i>
+              </div>
+              <h5 class="fw-semibold mb-2">Status Permintaan</h5>
+              <p class="text-muted mb-3">Lihat status permintaan bahan: menunggu, disetujui, atau ditolak.</p>
+              <a href="{{ url('/dapur/status') }}" class="btn btn-warning text-dark fw-medium mt-auto">
+                <i class="bi bi-eye me-1"></i> Lihat Status
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    @else
+      @yield('content')
+    @endif
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-success text-white text-center py-3 mt-auto">
+    © 2025 MBG System — Dapur Division. All rights reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ asset('js/ets.js') }}"></script>
 </body>
 </html>

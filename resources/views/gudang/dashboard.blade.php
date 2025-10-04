@@ -4,85 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MBG - Gudang</title>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .navbar-brand {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .card {
-            border: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            height: 100%;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        }
-        .card-body {
-            padding: 1.5rem;
-        }
-        .card-title {
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: #212529;
-        }
-        .card-text {
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        .btn {
-            font-weight: 500;
-            padding: 0.45rem 1.25rem;
-            border-radius: 8px;
-        }
-        .welcome-header {
-            font-weight: 600;
-            color: #343a40;
-            margin-bottom: 1.5rem;
-        }
-        .icon-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        .bg-primary-light {
-            background-color: rgba(13, 110, 253, 0.15);
-            color: #0d6efd;
-        }
-        .bg-success-light {
-            background-color: rgba(25, 135, 84, 0.15);
-            color: #198754;
-        }
-    </style>
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm py-3">
         <div class="container">
-            <a href="{{ url('/gudang')}}" class="navbar-brand">MBG - Gudang</a>
+            <a href="{{ url('/gudang') }}" class="navbar-brand fw-bold">MBG - Gudang</a>
+
             <div class="d-flex">
-                <a href="{{ url('/gudang/bahan') }}" class="btn btn-outline-light btn-sm me-2 px-3">
-                    <i class="bi bi-box me-1"></i> Kelola Bahan Baku
+                <a href="{{ url('/gudang/bahan') }}" class="btn btn-outline-light btn-sm me-2">
+                    <i class="bi bi-box me-1"></i> Kelola Bahan
                 </a>
-                <a href="{{ url('/gudang/permintaan') }}" class="btn btn-outline-light btn-sm me-2 px-3">
-                    <i class="bi bi-clipboard me-1"></i> Permintaan dari Dapur
+                <a href="{{ url('/gudang/permintaan') }}" class="btn btn-outline-light btn-sm me-2">
+                    <i class="bi bi-clipboard me-1"></i> Permintaan Dapur
                 </a>
                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
                     @csrf
-                    <button type="submit" class="btn btn-link text-white btn-sm px-3"
+                    <button type="submit" class="btn btn-light btn-sm"
                             onclick="return confirm('Yakin logout?')">
                         <i class="bi bi-box-arrow-right me-1"></i> Logout
                     </button>
@@ -91,34 +35,38 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <!-- Main Content -->
+    <main class="container my-5 flex-grow-1">
         @if (!View::hasSection('content'))
-            <h2 class="welcome-header">Selamat Datang di Gudang MBG</h2>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center d-flex flex-column justify-content-center">
-                            <div class="icon-circle bg-primary-light mx-auto">
-                                <i class="bi bi-box"></i>
+            <h2 class="text-center fw-bold mb-4 text-dark">Selamat Datang di Gudang MBG</h2>
+
+            <div class="row g-4 justify-content-center">
+                <!-- Card 1 -->
+                <div class="col-md-5">
+                    <div class="card h-100 shadow-sm border-0 text-center">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <div class="rounded-circle bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center mx-auto mb-3" style="width:70px; height:70px;">
+                                <i class="bi bi-box fs-2"></i>
                             </div>
-                            <h5 class="card-title">Kelola Bahan Baku</h5>
-                            <p class="card-text text-muted mb-3">Lihat, tambah, ubah, atau hapus stok bahan baku.</p>
-                            <a href="{{ url('/gudang/bahan') }}" class="btn btn-primary mt-auto">
+                            <h5 class="card-title fw-semibold">Kelola Bahan Baku</h5>
+                            <p class="text-muted mb-3">Lihat, tambah, ubah, atau hapus stok bahan baku dengan mudah.</p>
+                            <a href="{{ url('/gudang/bahan') }}" class="btn btn-primary">
                                 <i class="bi bi-journal-plus me-1"></i> Kelola Sekarang
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center d-flex flex-column justify-content-center">
-                            <div class="icon-circle bg-success-light mx-auto">
-                                <i class="bi bi-clipboard"></i>
+                <!-- Card 2 -->
+                <div class="col-md-5">
+                    <div class="card h-100 shadow-sm border-0 text-center">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <div class="rounded-circle bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center mx-auto mb-3" style="width:70px; height:70px;">
+                                <i class="bi bi-clipboard fs-2"></i>
                             </div>
-                            <h5 class="card-title">Permintaan dari Dapur</h5>
-                            <p class="card-text text-muted mb-3">Kelola dan proses permintaan bahan dari dapur.</p>
-                            <a href="{{ url('/gudang/permintaan') }}" class="btn btn-success mt-auto">
+                            <h5 class="card-title fw-semibold">Permintaan dari Dapur</h5>
+                            <p class="text-muted mb-3">Kelola dan proses permintaan bahan dari dapur secara efisien.</p>
+                            <a href="{{ url('/gudang/permintaan') }}" class="btn btn-success">
                                 <i class="bi bi-eye me-1"></i> Lihat Permintaan
                             </a>
                         </div>
@@ -128,8 +76,15 @@
         @else
             @yield('content')
         @endif
-    </div>
+    </main>
 
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3 mt-auto">
+        <small>&copy; {{ date('Y') }} MBG Gudang. All rights reserved.</small>
+    </footer>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/ets.js') }}"></script>
 </body>
 </html>
